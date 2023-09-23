@@ -18,10 +18,16 @@ return new class extends Migration
             $table->unsignedBigInteger('home_team_id');
             $table->unsignedBigInteger('away_team_id');
             $table->integer('week');
+            $table->integer('home_team_goals')->nullable();
+            $table->integer('away_team_goals')->nullable();
+            $table->boolean('is_played')->default(false);
+            $table->unsignedBigInteger('winner_id')->nullable();
             $table->timestamps();
 
             $table->foreign('home_team_id')->references('id')->on('teams');
             $table->foreign('away_team_id')->references('id')->on('teams');
+            $table->foreign('winner_id')->references('id')->on('teams');
+
         });
     }
 

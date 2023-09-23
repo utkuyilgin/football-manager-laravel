@@ -16,8 +16,14 @@ return new class extends Migration
         Schema::create('teams', function (Blueprint $table) {
             $table->id();
             $table->string("name");
-            $table->integer("motivation")->default(0);
-            $table->integer('win_rate')->default(0);
+            $table->integer("power_point")->default(0);
+            $table->integer('supporter_power')->default(0);
+            $table->integer('goal_keeper_power')->default(0);
+            $table->integer('motivation')->default(0);
+            $table->integer('win')->default(0);
+            $table->integer('draw')->default(0);
+            $table->integer('lose')->default(0);
+            $table->integer('point')->default(0);
             $table->timestamps();
         });
     }
