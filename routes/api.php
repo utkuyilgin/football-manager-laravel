@@ -2,7 +2,10 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\FixtureController;
+use App\Http\Controllers\MatchController;
+use App\Http\Controllers\ResetController;
+use App\Http\Controllers\TeamController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -14,6 +17,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::get('/teams', [TeamController::class, 'index']);
+Route::get('/current-week', [FixtureController::class, 'getCurrentWeek']);
+Route::get('/current-week-matches', [FixtureController::class, 'getCurrentWeekMatches']);
+Route::get('/generate-fixtures', [FixtureController::class, 'generateFixture']);
+Route::get('/scoreboard', [FixtureController::class, 'getScoreBoard']);
+Route::post('/play', [MatchController::class, 'play']);
+Route::get('championship-prodictions', [FixtureController::class, 'championshipProdictions']);
+Route::get('/reset', [ResetController::class, 'resetData']);

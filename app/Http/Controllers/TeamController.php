@@ -1,21 +1,14 @@
 <?php
 
-namespace Database\Seeders;
+namespace App\Http\Controllers;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
+use App\Models\Team;
 
-class TeamSeeder extends Seeder
+class TeamController extends Controller
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
-    public function run()
-    {
-        DB::table('teams')->insert([
+    public function index() {
+        $teams = [
             ['name' => 'Liverpool',
             'power_point' => 86,
             'supporter_power' => 54,
@@ -40,6 +33,24 @@ class TeamSeeder extends Seeder
             'goal_keeper_power' => 78,
             'motivation' => 65,
             ],
-        ]);
+        ];
+
+        foreach($teams as $team) {
+            // update or create team
+            $team = Team::updateOrCreate(
+                ['name' => $team['name']],
+                [
+                    'power_point' => $team['power_point'],
+                    'supporter_power' => $team['supporter_power'],
+                    'goal_keeper_power' => $team['goal_keeper_power'],
+                    'motivation' => $team['motivation'],
+                ],
+            );
+        }
+
+        return response()->json([
+            'success' => true,
+            'data' => Team::all()
+        ], 200);
     }
 }
