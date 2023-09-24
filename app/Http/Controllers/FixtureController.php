@@ -171,11 +171,7 @@ class FixtureController extends Controller
             if ($team['point'] == 0 && $totalPoints == 0) {
                 $team['percentage'] = 25;
             } else {
-                if(($team['point'] + ($remainingWeeks * 3)) < $teams->max('point')){
-                    $team['percentage'] = 0;
-                }else{
-                    $team['percentage'] = ($team['point'] / $totalPoints) * 100;
-                }
+                $team['percentage'] = ($team['point'] / $totalPoints) * 100;
             }
         }
 
